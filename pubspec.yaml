@@ -1,0 +1,32 @@
+name: aula04
+description: "Buscador de GIF 2.0 — projeto Flutter estruturado com Provider e Hive."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  http: ^1.2.0
+  provider: ^6.1.2          # 👈 para gerenciamento de estado
+  hive: ^2.2.3              # 👈 banco local leve
+  hive_flutter: ^1.1.0      # 👈 integração Hive + Flutter
+  shared_preferences: ^2.2.2  # ainda pode usar para configs simples
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  hive_generator: ^2.0.1     # 👈 (opcional) se quiser gerar adapters
+  build_runner: ^2.4.6       # 👈 (opcional) para gerar código do Hive
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/gifs/
