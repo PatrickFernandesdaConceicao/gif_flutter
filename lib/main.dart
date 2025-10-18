@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
+import 'core/db/hive_manager.dart';
+import 'core/prefs/app_preferences.dart';
+import 'data/repositories/gif_repository.dart';
+import 'data/repositories/local_repository.dart';
+import 'services/giphy_service.dart';
 import 'state/gif_notifier.dart';
-import 'ui/pages/random_gif_page.dart';
+import 'ui/pages/home_page.dart';
 import 'ui/theme/app_theme.dart';
+import 'core/config/app_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Inicializa Hive
-  await Hive.initFlutter();
-  await Hive.openBox('favorites');
-  await Hive.openBox('settings');
+  
+  await HiveManager.init();
 
   runApp(const GiphyRandomApp());
 }
@@ -22,15 +24,26 @@ class GiphyRandomApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => GifNotifier(),
+    return MultiProvider(
+      providers: [
+        Provider(create: (context) => LocalRepository()),
+        Provider(create: (context) => GiphyService(AppConfig.giphyApiKey)),
+        Provider(create: (context) => GifRepository(context.read<GiphyService>())),
+        ChangeNotifierProvider(
+          create: (context) => GifNotifier(
+            remoteRepo: context.read<GifRepository>(),
+            localRepo: context.read<LocalRepository>(),
+          ),
+        ),
+        Provider(create: (context) => AppPreferences(context.read<LocalRepository>())),
+      ],
       child: MaterialApp(
         title: 'Buscador de GIF 2.0',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: ThemeMode.system,
-        home: const RandomGifPage(),
+        home: const HomePage(),
       ),
     );
   }

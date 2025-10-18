@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../data/repositories/gif_repository.dart';
-import '../../services/giphy_service.dart';
+import 'package:provider/provider.dart';
+
 import '../../state/gif_notifier.dart';
 import '../widgets/gif_card.dart';
-
-const _apiKey = 'ZmQjBKeltbRmRkTtDqwSP7bI5xfEvIjp';
 
 class RandomGifPage extends StatefulWidget {
   const RandomGifPage({super.key});
@@ -14,23 +12,29 @@ class RandomGifPage extends StatefulWidget {
 }
 
 class _RandomGifPageState extends State<RandomGifPage> {
-  late final GifNotifier notifier;
   final tagController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    notifier = GifNotifier(GifRepository(GiphyService(_apiKey)));
-    notifier.fetchRandom();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<GifNotifier>().fetchRandom();
+      context.read<GifNotifier>().loadFavorites();
+    });
+  }
+
+  @override
+  void dispose() {
+    tagController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('GIF Aleatório')),
-      body: AnimatedBuilder(
-        animation: notifier,
-        builder: (context, _) {
+      body: Consumer<GifNotifier>(
+        builder: (context, notifier, _) {
           if (notifier.loading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -40,13 +44,34 @@ class _RandomGifPageState extends State<RandomGifPage> {
           if (notifier.currentGif == null) {
             return const Center(child: Text('Nenhum GIF disponível.'));
           }
-          return Center(
-            child: GifCard(gif: notifier.currentGif!),
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(child: GifCard(gif: notifier.currentGif!)),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  controller: tagController,
+                  onChanged: (value) {
+                    // Debounce automático ao digitar
+                    notifier.searchWithDebounce(tag: value.isEmpty ? null : value);
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Digite uma tag (busca automática)',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => notifier.fetchRandom(tag: tagController.text),
+        onPressed: () => context.read<GifNotifier>().fetchRandom(
+          tag: tagController.text.isEmpty ? null : tagController.text,
+        ),
         child: const Icon(Icons.refresh),
       ),
     );

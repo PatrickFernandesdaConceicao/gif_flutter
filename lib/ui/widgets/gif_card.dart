@@ -1,5 +1,8 @@
+// lib/ui/widgets/gif_card.dart
 import 'package:flutter/material.dart';
-import '../../../data/models/gif_model.dart';
+import 'package:provider/provider.dart';
+import '../../data/models/gif_model.dart';
+import '../../state/gif_notifier.dart';
 
 class GifCard extends StatelessWidget {
   final GifModel gif;
@@ -25,6 +28,7 @@ class GifCard extends StatelessWidget {
             errorBuilder: (context, error, stack) =>
                 const Center(child: Icon(Icons.error_outline)),
           ),
+          // Título na base
           Positioned(
             bottom: 8,
             left: 8,
@@ -40,6 +44,25 @@ class GifCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+            ),
+          ),
+          // Botão de favorito no topo direito
+          Positioned(
+            top: 8,
+            right: 8,
+            child: Consumer<GifNotifier>(
+              builder: (context, notifier, _) {
+                final isFav = notifier.isFavorite(gif);
+                return FloatingActionButton(
+                  mini: true,
+                  backgroundColor: isFav ? Colors.red : Colors.white,
+                  onPressed: () => notifier.toggleFavorite(gif),
+                  child: Icon(
+                    isFav ? Icons.favorite : Icons.favorite_border,
+                    color: isFav ? Colors.white : Colors.red,
+                  ),
+                );
+              },
             ),
           ),
         ],
