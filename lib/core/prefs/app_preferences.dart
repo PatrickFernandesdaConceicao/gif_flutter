@@ -1,24 +1,41 @@
-import '../../data/repositories/local_repository.dart';
+// lib/core/prefs/app_preferences.dart
+import '../../data/repositories/mysql_repository.dart';
 
 class AppPreferences {
-  final LocalRepository _repo;
+  final MySQLRepository _mysqlRepo;
 
-  AppPreferences(this._repo);
+  AppPreferences(this._mysqlRepo);
 
-  static const themeKey = 'theme';
-  static const ratingKey = 'rating';
-  static const languageKey = 'language';
-  static const autoplayKey = 'autoplay';
+  // ==================== TEMA ====================
 
-  Future<void> setTheme(String theme) => _repo.setPreference(themeKey, theme);
-  String getTheme() => _repo.getPreference(themeKey, 'system');
+  Future<String> getTheme() async {
+    final value = await _mysqlRepo.getPreference('theme');
+    return value ?? 'system';
+  }
 
-  Future<void> setRating(String rating) => _repo.setPreference(ratingKey, rating);
-  String getRating() => _repo.getPreference(ratingKey, 'g');
+  Future<void> setTheme(String theme) async {
+    await _mysqlRepo.setPreference('theme', theme);
+  }
 
-  Future<void> setLanguage(String lang) => _repo.setPreference(languageKey, lang);
-  String getLanguage() => _repo.getPreference(languageKey, 'en');
+  // ==================== RATING ====================
 
-  Future<void> setAutoplay(bool value) => _repo.setPreference(autoplayKey, value);
-  bool getAutoplay() => _repo.getPreference(autoplayKey, true);
+  Future<String> getRating() async {
+    final value = await _mysqlRepo.getPreference('rating');
+    return value ?? 'g';
+  }
+
+  Future<void> setRating(String rating) async {
+    await _mysqlRepo.setPreference('rating', rating);
+  }
+
+  // ==================== AUTOPLAY ====================
+
+  Future<bool> getAutoplay() async {
+    final value = await _mysqlRepo.getPreference('autoplay');
+    return value == 'true';
+  }
+
+  Future<void> setAutoplay(bool autoplay) async {
+    await _mysqlRepo.setPreference('autoplay', autoplay.toString());
+  }
 }

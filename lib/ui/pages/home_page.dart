@@ -1,7 +1,6 @@
 // lib/ui/pages/home_page.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../state/gif_notifier.dart';
 import 'random_gif_page.dart';
 import 'favorites_page.dart';
 import 'history_page.dart';

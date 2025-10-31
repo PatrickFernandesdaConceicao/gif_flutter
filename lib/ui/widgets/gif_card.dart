@@ -50,13 +50,16 @@ class GifCard extends StatelessWidget {
           Positioned(
             top: 8,
             right: 8,
-            child: Consumer<GifNotifier>(
-              builder: (context, notifier, _) {
-                final isFav = notifier.isFavorite(gif);
+            child: FutureBuilder<bool>(
+              future: context.read<GifNotifier>().isFavorite(gif),
+              builder: (context, snapshot) {
+                final isFav = snapshot.data ?? false;
                 return FloatingActionButton(
                   mini: true,
                   backgroundColor: isFav ? Colors.red : Colors.white,
-                  onPressed: () => notifier.toggleFavorite(gif),
+                  onPressed: () async {
+                    await context.read<GifNotifier>().toggleFavorite(gif);
+                  },
                   child: Icon(
                     isFav ? Icons.favorite : Icons.favorite_border,
                     color: isFav ? Colors.white : Colors.red,

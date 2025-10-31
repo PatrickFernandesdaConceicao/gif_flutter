@@ -2,18 +2,18 @@
 import 'package:flutter/foundation.dart';
 import '../data/models/gif_model.dart';
 import '../data/repositories/gif_repository.dart';
-import '../data/repositories/local_repository.dart';
+import '../data/repositories/mysql_repository.dart';
 import 'dart:async';
 
 class GifNotifier extends ChangeNotifier {
   final GifRepository remoteRepo;
-  final LocalRepository localRepo;
+  final MySQLRepository mysqlRepo;
 
   GifNotifier({
     required this.remoteRepo,
-    required this.localRepo,
+    required this.mysqlRepo,
   }) {
-    _loadHistory();
+    _init();
   }
 
   GifModel? currentGif;
@@ -25,6 +25,13 @@ class GifNotifier extends ChangeNotifier {
   Timer? _debounceTimer;
   static const _debounceDelay = Duration(milliseconds: 500);
 
+  Future<void> _init() async {
+    await loadFavorites();
+    await _loadHistory();
+  }
+
+  // ==================== GIF ALEATÓRIO ====================
+
   Future<void> fetchRandom({String? tag, String rating = 'g'}) async {
     loading = true;
     error = null;
@@ -34,10 +41,9 @@ class GifNotifier extends ChangeNotifier {
       currentGif = await remoteRepo.getRandomGif(tag: tag, rating: rating);
       
       // Adiciona ao histórico se houver tag
-      if (tag != null && tag.isNotEmpty && !searchHistory.contains(tag)) {
-        searchHistory.insert(0, tag);
-        if (searchHistory.length > 10) searchHistory.removeLast();
-        _saveHistory();
+      if (tag != null && tag.isNotEmpty) {
+        await mysqlRepo.addToHistory(tag);
+        await _loadHistory();
       }
     } catch (e) {
       error = e.toString();
@@ -55,33 +61,44 @@ class GifNotifier extends ChangeNotifier {
     });
   }
 
-  void loadFavorites() {
-    favorites = localRepo.getFavorites();
+  // ==================== FAVORITOS ====================
+
+  Future<void> loadFavorites() async {
+    favorites = await mysqlRepo.getFavorites();
     notifyListeners();
   }
 
   Future<void> toggleFavorite(GifModel gif) async {
-    await localRepo.toggleFavorite(gif);
-    loadFavorites();
+    final isFav = await mysqlRepo.isFavorite(gif.id);
+    
+    if (isFav) {
+      await mysqlRepo.removeFavorite(gif.id);
+    } else {
+      await mysqlRepo.addFavorite(gif);
+    }
+    
+    await loadFavorites();
   }
 
-  bool isFavorite(GifModel gif) => localRepo.isFavorite(gif.id);
-
-  // Histórico
-  Future<void> _saveHistory() async {
-    await localRepo.setPreference('searchHistory', searchHistory);
+  Future<bool> isFavorite(GifModel gif) async {
+    return await mysqlRepo.isFavorite(gif.id);
   }
+
+  // ==================== HISTÓRICO ====================
 
   Future<void> _loadHistory() async {
-    final history = localRepo.getPreference('searchHistory', <String>[]);
-    searchHistory = List<String>.from(history);
+    searchHistory = await mysqlRepo.getSearchHistory();
     notifyListeners();
   }
 
-  void removeFromHistory(String tag) {
-    searchHistory.remove(tag);
-    _saveHistory();
-    notifyListeners();
+  Future<void> removeFromHistory(String tag) async {
+    await mysqlRepo.removeFromHistory(tag);
+    await _loadHistory();
+  }
+
+  Future<void> clearHistory() async {
+    await mysqlRepo.clearHistory();
+    await _loadHistory();
   }
 
   @override

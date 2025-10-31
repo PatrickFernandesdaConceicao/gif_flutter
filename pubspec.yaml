@@ -17,6 +17,7 @@ dependencies:
   hive: ^2.2.3              # 👈 banco local leve
   hive_flutter: ^1.1.0      # 👈 integração Hive + Flutter
   shared_preferences: ^2.2.2  # ainda pode usar para configs simples
+  mysql1: ^0.20.0
 
 dev_dependencies:
   flutter_test:
