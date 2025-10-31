@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main\build\windows\x64\CMakeFiles\bab67b9d3cfcca6e1030a74033d6dbc5\flutter_windows.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main\build\windows\x64\CMakeFiles\64a955dede4651d16288e0316bb2d505\flutter_assemble.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main\build\windows\x64\flutter\CMakeFiles\flutter_assemble" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{FEDBD476-ADA8-3417-95EC-1E72FD269655}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

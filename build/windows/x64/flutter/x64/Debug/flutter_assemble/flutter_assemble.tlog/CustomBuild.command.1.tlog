@@ -1,0 +1,28 @@
+^C:\USERS\PATRI\DOWNLOADS\ATIVIDADE-GIF-GRUPO-4 (2)\ATIVIDADE-GIF-GRUPO-4\GIF_FLUTTER-MAIN(1)\GIF_FLUTTER-MAIN\BUILD\WINDOWS\X64\CMAKEFILES\BAB67B9D3CFCCA6E1030A74033D6DBC5\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\patri\Flutter\flutter_windows_3.22.2-stable\flutter "PROJECT_DIR=C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main" FLUTTER_ROOT=C:\Users\patri\Flutter\flutter_windows_3.22.2-stable\flutter "FLUTTER_EPHEMERAL_DIR=C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main\windows\flutter\ephemeral" "PROJECT_DIR=C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main" "FLUTTER_TARGET=C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main\lib\main.dart" DART_DEFINES=RkxVVFRFUl9WRVJTSU9OPTMuMzUuNg==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049OWY0NTVkMjQ4Ng==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049ZDI5MTM2MzJhNA==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My45LjI= DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false "PACKAGE_CONFIG=C:\Users\patri\Downloads\atividade-gif-grupo-4 (2)\atividade-gif-grupo-4\gif_flutter-main(1)\gif_flutter-main\.dart_tool\package_config.json" C:/Users/patri/Flutter/flutter_windows_3.22.2-stable/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PATRI\DOWNLOADS\ATIVIDADE-GIF-GRUPO-4 (2)\ATIVIDADE-GIF-GRUPO-4\GIF_FLUTTER-MAIN(1)\GIF_FLUTTER-MAIN\BUILD\WINDOWS\X64\CMAKEFILES\64A955DEDE4651D16288E0316BB2D505\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PATRI\DOWNLOADS\ATIVIDADE-GIF-GRUPO-4 (2)\ATIVIDADE-GIF-GRUPO-4\GIF_FLUTTER-MAIN(1)\GIF_FLUTTER-MAIN\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/Users/patri/Downloads/atividade-gif-grupo-4 (2)/atividade-gif-grupo-4/gif_flutter-main(1)/gif_flutter-main/windows" "-BC:/Users/patri/Downloads/atividade-gif-grupo-4 (2)/atividade-gif-grupo-4/gif_flutter-main(1)/gif_flutter-main/build/windows/x64" --check-stamp-file "C:/Users/patri/Downloads/atividade-gif-grupo-4 (2)/atividade-gif-grupo-4/gif_flutter-main(1)/gif_flutter-main/build/windows/x64/flutter/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

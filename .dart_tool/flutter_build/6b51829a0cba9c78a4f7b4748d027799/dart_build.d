@@ -1,0 +1,1 @@
+ C:\\Users\\patri\\Downloads\\atividade-gif-grupo-4\ (2)\\atividade-gif-grupo-4\\gif_flutter-main(1)\\gif_flutter-main\\.dart_tool\\flutter_build\\6b51829a0cba9c78a4f7b4748d027799\\dart_build_result.json: 

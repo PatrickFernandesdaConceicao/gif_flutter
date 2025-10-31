@@ -1,0 +1,10 @@
+^C:\USERS\PATRI\DOWNLOADS\ATIVIDADE-GIF-GRUPO-4 (2)\ATIVIDADE-GIF-GRUPO-4\GIF_FLUTTER-MAIN(1)\GIF_FLUTTER-MAIN\BUILD\WINDOWS\X64\CMAKEFILES\F23AFC4EAECA1DA13ADD3B1A0105C1F7\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
