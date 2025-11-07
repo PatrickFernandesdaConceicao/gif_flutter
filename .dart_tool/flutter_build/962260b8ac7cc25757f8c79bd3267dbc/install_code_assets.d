@@ -1,0 +1,1 @@
+ C:\\Users\\patri\\OneDrive\\Documentos\\gif_flutter-main(1)\\gif_flutter-main\\.dart_tool\\flutter_build\\962260b8ac7cc25757f8c79bd3267dbc\\native_assets.json: 
